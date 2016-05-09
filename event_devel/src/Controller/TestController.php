@@ -2,6 +2,8 @@
 
 namespace Drupal\event_devel\Controller;
 
+use Drupal\event\Entity\Event;
+
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -66,6 +68,74 @@ class TestController implements ContainerInjectionInterface {
   public function evaluateTestCode() {
 
     // Place any test code here.
+
+    /*
+    $event = Event::create();
+    $event->save();
+    drupal_set_message('Saved Event: ' . $event->id());
+    $existing_event = Event::load(1);
+    drupal_set_message($existing_event->uuid());
+    drupal_set_message($existing_event->id());
+    */
+
+    /* Set some fields.
+    $event = Event::load(1);
+    // Set the Title.
+    $event->set('title', 'DrupalCon New Orleans');
+
+    // Set the date.
+    $date = new \DateTime();
+    $event->set('date', $date->format(DATETIME_DATE_STORAGE_FORMAT));
+    // Also works like....
+    //$event->set('date', '2016-05-09');
+
+    // Set the Description.
+    $event->set('description', [
+      'value' => '<strong>Lorem ipsum</strong>',
+      'format' => 'basic_html',
+    ]);
+    $event->save();
+    */
+
+    /*
+    $event = Event::load(1);
+    // From "label" = "title",
+    $label = $event->label();
+    drupal_set_message('Label: ' . $label);
+
+    $title = $event->get('title')->value;
+    $date = $event->get('date')->value;
+    drupal_set_message(t('@title on @date', array('@title' => $title, '@date' => $date)));
+    $date_obj = $event->get('date')->date;
+    $formatted_date =$date_obj->format('m/d/Y');
+    drupal_set_message(t('@title on @date', array('@title' => $title, '@date' => $formatted_date)));
+    $desc_format = $event->get('description')->format;
+    $desc_value = $event->get('description')->value;
+    $html = $event->get('description')->processed;
+    drupal_set_message(t('Value: @desc', array('@desc' => $desc_value)));
+    drupal_set_message(t('Format: @desc', array('@desc' => $desc_format)));
+    drupal_set_message(t('HTML: @desc', array('@desc' => $html)));
+    */
+
+    /*
+    $event = Event::load(1);
+    $event->setTitle('DrupalCon Dublin');
+    $date = new \DateTime();
+    $event->setDate($date);
+    $event->setDescription('<em>Lorem ipsum</em>', 'basic_html');
+    $event->save();
+    */
+
+    /*
+    $event = Event::load(1);
+    $title = $event->getTitle();
+    $date = $event->getDate();
+    $date_value = $date->format('m/d/Y');
+    $desc = $event->getDescription();
+    drupal_set_message(t('Title: @title', array('@title' => $title)));
+    drupal_set_message(t('Date: @date', array('@date' => $date_value)));
+    drupal_set_message(t('Desc: @desc', array('@desc' => $desc)));
+    */
 
     return ['#markup' => 'Any code placed in \\' . __METHOD__ . '() is executed on this page.'];
   }
